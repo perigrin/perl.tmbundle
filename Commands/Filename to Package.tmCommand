@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env perl
+use strict;
+use warnings;
+
+my $package = get_package( path =&gt; $ENV{TM_FILEPATH}, walk_up_to =&gt; 'lib' );
+my $content = get_content();
+
+if ($content) {
+    $content =~ s/^package (.*?);/package $package;/;
+    print $content;
+}
+else {
+    print "package $package;\n\nuse strict;\nuse warnings;\n\n1;";
+}
+
+sub get_content {
+    local $/ = undef;
+    return &lt;&gt;;
+}
+
+sub get_package {
+    my (%args) = @_;
+    my @chunks = split qr~/~, $args{path};
+    while ( @chunks &gt; 0 ) {
+        last if $chunks[0] eq $args{walk_up_to};
+        shift @chunks;
+    }
+    shift @chunks;
+    my $pkg = join '::', @chunks;
+    $pkg =~ s/\.pm//g;
+    return $pkg;
+}</string>
+	<key>input</key>
+	<string>document</string>
+	<key>keyEquivalent</key>
+	<string>^@p</string>
+	<key>name</key>
+	<string>Filename to Package</string>
+	<key>output</key>
+	<string>replaceSelectedText</string>
+	<key>scope</key>
+	<string>source.perl</string>
+	<key>uuid</key>
+	<string>5F8EB2CB-CEA6-4AB5-9283-56B0712E2622</string>
+</dict>
+</plist>

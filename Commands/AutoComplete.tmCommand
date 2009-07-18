@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>saveActiveFile</string>
+	<key>command</key>
+	<string>eval $(perl -I$HOME/foo/lib/perl5 -Mlocal::lib=$HOME/foo)
+
+perl -MDevel::IntelliPerl::Editor::TextMate -e 'run' $TM_LINE_NUMBER $TM_LINE_INDEX "$TM_FILEPATH" 
+</string>
+	<key>fallbackInput</key>
+	<string>word</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string>^t</string>
+	<key>name</key>
+	<string>AutoComplete</string>
+	<key>output</key>
+	<string>replaceSelectedText</string>
+	<key>scope</key>
+	<string>source.perl</string>
+	<key>uuid</key>
+	<string>98DC5823-97EE-4B94-B5F0-186CB596AED8</string>
+</dict>
+</plist>
